@@ -16,9 +16,6 @@ class EventController extends Controller
 {
     /**
      * List events with optional filters like search, status, and start date.
-     *
-     * @param IndexEventRequest $request
-     * @return JsonResponse
      */
     public function index(IndexEventRequest $request): JsonResponse
     {
@@ -39,9 +36,6 @@ class EventController extends Controller
 
     /**
      * Show a single event with its related markets, selections, league, and teams.
-     *
-     * @param Event $event
-     * @return JsonResponse
      */
     public function show(Event $event): JsonResponse
     {

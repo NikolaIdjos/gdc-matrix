@@ -14,10 +14,9 @@ class OnePerMarket implements ValidationRule
     /**
      * Validate that the given selection IDs contain at most one selection per market.
      *
-     * @param string $attribute The name of the attribute under validation
-     * @param mixed $value The value of the attribute (expected to be an array of selection IDs)
-     * @param \Closure(string, ?string=): \Illuminate\Translation\PotentiallyTranslatedString $fail Callback to indicate validation failure
-     * @return void
+     * @param  string  $attribute  The name of the attribute under validation
+     * @param  mixed  $value  The value of the attribute (expected to be an array of selection IDs)
+     * @param  \Closure(string, ?string=): \Illuminate\Translation\PotentiallyTranslatedString  $fail  Callback to indicate validation failure
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {

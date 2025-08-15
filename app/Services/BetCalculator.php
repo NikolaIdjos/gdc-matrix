@@ -15,7 +15,7 @@ class BetCalculator
      *
      * Multiplies all selection odds together using high-precision arithmetic.
      *
-     * @param Collection $selections Collection of Selection models with an 'odds' property
+     * @param  Collection  $selections  Collection of Selection models with an 'odds' property
      * @return float Combined odds
      */
     public function combinedOdds(Collection $selections): float
@@ -33,8 +33,8 @@ class BetCalculator
      *
      * Uses combined odds and multiplies by stake.
      *
-     * @param Collection $selections Collection of Selection models
-     * @param float $stake Amount of money bet
+     * @param  Collection  $selections  Collection of Selection models
+     * @param  float  $stake  Amount of money bet
      * @return float Potential payout
      */
     public function potentialPayout(Collection $selections, float $stake): float

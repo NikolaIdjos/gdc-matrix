@@ -24,7 +24,7 @@ class StoreBetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'selection_ids' => ['required', 'array', new OnePerMarket, new SameEvent],
+            'selection_ids' => ['required', 'array', new OnePerMarket(), new SameEvent()],
             'selection_ids.*' => ['required', 'integer', 'exists:selections,id'],
             'stake' => ['required', 'numeric', 'gt:0', 'max:1000000'],
         ];
