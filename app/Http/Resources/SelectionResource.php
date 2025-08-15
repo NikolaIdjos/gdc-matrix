@@ -2,9 +2,17 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Database\Selection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin Selection
+ * @property int $id
+ * @property int $market_id
+ * @property string $name
+ * @property float $odds
+ */
 class SelectionResource extends JsonResource
 {
     /**

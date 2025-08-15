@@ -17,7 +17,7 @@ class BetController extends Controller
     protected BetCalculator $calculator;
 
     /**
-     * @param  BetCalculator  $calculator  Service responsible for calculating odds and payouts
+     * @param  BetCalculator  $calculator
      */
     public function __construct(BetCalculator $calculator)
     {

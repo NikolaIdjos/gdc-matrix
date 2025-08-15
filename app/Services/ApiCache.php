@@ -25,9 +25,9 @@ class ApiCache
      * Retrieve data from cache or store it if missing.
      *
      * @param  string   $cacheKey
-     * @param  int      $seconds  0 = cache forever
+     * @param  int      $seconds
      * @param  \Closure $callback
-     * @return array
+     * @return array<mixed>
      */
     public function remember(string $cacheKey, int $seconds, \Closure $callback): array
     {
