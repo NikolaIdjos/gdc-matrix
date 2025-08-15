@@ -9,7 +9,7 @@
             <!-- Event Card -->
             <div class="bg-white shadow rounded-lg p-6 text-center">
                 <div class="space-y-2">
-                    <p class="font-semibold"> {{ event.status || '-' }}</p>
+                    <p class="font-semibold"> {{ event.status ? event.status.replace(/_/g, ' ') : '-' }}</p>
                     <p>
                         <span class="block">{{ $formatDate(event.scheduled_at).split(' ')[0] }}</span>
                         <span class="text-sm text-gray-400">{{ $formatDate(event.scheduled_at).split(' ')[1] }}</span>
