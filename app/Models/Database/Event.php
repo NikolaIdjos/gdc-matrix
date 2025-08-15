@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property \Illuminate\Support\Carbon $scheduled_at
  * @property EventStatusEnum $status_id
  * @property CompetitorTypeEnum $competitor_type_id
- *
  * @property-read League $league
  * @property-read Market[]|HasMany $markets
  * @property-read Team[]|BelongsToMany $teams

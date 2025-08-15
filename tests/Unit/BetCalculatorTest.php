@@ -37,7 +37,7 @@ class BetCalculatorTest extends TestCase
 
     public function test_edge_case_no_selections()
     {
-        $selections = new Collection;
+        $selections = new Collection();
 
         $this->assertEquals(1.0, $this->calculator->combinedOdds($selections));
         $this->assertEquals(10.0, $this->calculator->potentialPayout($selections, 10));

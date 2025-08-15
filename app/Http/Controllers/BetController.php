@@ -17,7 +17,7 @@ class BetController extends Controller
     protected BetCalculator $calculator;
 
     /**
-     * @param BetCalculator $calculator Service responsible for calculating odds and payouts
+     * @param  BetCalculator  $calculator  Service responsible for calculating odds and payouts
      */
     public function __construct(BetCalculator $calculator)
     {
@@ -26,9 +26,6 @@ class BetController extends Controller
 
     /**
      * Calculate combined odds and potential payout for the given selections.
-     *
-     * @param StoreBetRequest $request
-     * @return JsonResponse
      */
     public function calculate(StoreBetRequest $request): JsonResponse
     {
