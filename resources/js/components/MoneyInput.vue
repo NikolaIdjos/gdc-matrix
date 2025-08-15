@@ -25,12 +25,12 @@
 import { ref } from 'vue';
 
 const props = defineProps({
-    modelValue: [Number, null],
+    modelValue: [Number, String],
 });
 
 const error = ref<boolean>(false);
 const emit = defineEmits(['update:modelValue']);
-const localStake = ref<number | null>(props.modelValue);
+const localStake = ref<number>(props.modelValue);
 
 // Mask setup
 const maskOptions = {
