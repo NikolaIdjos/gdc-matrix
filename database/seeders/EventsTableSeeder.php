@@ -14,7 +14,6 @@ class EventsTableSeeder extends Seeder
             Event::factory(5)
                 ->for($league)
                 ->withTeams()
-                ->hasMarkets(2)
                 ->create();
         });
     }

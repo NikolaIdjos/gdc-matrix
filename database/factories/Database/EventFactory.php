@@ -27,12 +27,21 @@ class EventFactory extends Factory
     {
         $name = $this->faker->unique()->sentence(3);
 
+        $status = collect(EventStatusEnum::cases())->random();
+
+        $scheduledAt = match ($status) {
+            EventStatusEnum::FINISHED => $this->faker->dateTimeBetween('-1 month', '-1 day'), // prošlost
+            EventStatusEnum::SCHEDULED => $this->faker->dateTimeBetween('+1 day', '+1 month'), // budućnost
+            EventStatusEnum::IN_PLAY => now(),
+            EventStatusEnum::CANCELLED => $this->faker->dateTimeBetween('-1 month', '+1 month'), // bilo kad
+        };
+
         return [
             'league_id' => League::factory(),
             'name' => $name,
             'slug' => Str::slug($name),
-            'scheduled_at' => $this->faker->dateTimeBetween('+1 days', '+1 month'),
-            'status_id' => EventStatusEnum::SCHEDULED->value,
+            'scheduled_at' => $scheduledAt,
+            'status_id' => $status->value,
             'competitor_type_id' => CompetitorTypeEnum::TEAM->value,
         ];
     }
