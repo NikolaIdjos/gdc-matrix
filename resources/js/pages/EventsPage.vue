@@ -60,7 +60,7 @@
                         {{ event.teams[0].name }} vs {{ event.teams[1].name }}
                     </td>
                     <td class="px-6 py-4 text-gray-500 font-medium">
-                        {{ event.status }}
+                        {{ event.status ? event.status.replace(/_/g, ' ') : '-' }}
                     </td>
                 </tr>
                 </tbody>
