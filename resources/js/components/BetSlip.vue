@@ -9,59 +9,61 @@
                 <button @click="$emit('close')" class="text-gray-500 hover:text-gray-700 text-2xl cursor-pointer">&times;</button>
             </div>
 
-            <!--Money Input Component-->
-            <div v-if="bet.markets && bet.markets.length">
-                <p class="font-medium pb-6 border-b border-gray-300">{{ bet.name }}</p>
+            <div class="overflow-y-auto">
+                <!--Money Input Component-->
+                <div v-if="bet.markets && bet.markets.length">
+                    <p class="font-medium pb-6 border-b border-gray-300">{{ bet.name }}</p>
 
-                <div v-if="bet.markets?.length">
-                    <div
-                        v-for="market in bet.markets.filter(m => m.selection)"
-                        :key="market.id"
-                        class="mt-4 mb-4 border-b border-gray-300 pb-4 flex justify-between items-start"
-                    >
-                        <div>
-                            <p class="font-semibold">{{ market.name }}</p>
-                            <p class="text-gray-700">Selection: {{ market.selection.name }}</p>
-                            <p class="text-gray-500">Odds: {{ market.selection.odds }}</p>
-                        </div>
-                        <button
-                            @click="removeSelection(market.id)"
-                            class="text-red-500 hover:text-red-700 text-2xl mt-1 cursor-pointer"
+                    <div v-if="bet.markets?.length">
+                        <div
+                            v-for="market in bet.markets.filter(m => m.selection)"
+                            :key="market.id"
+                            class="mt-4 mb-4 border-b border-gray-300 pb-4 flex justify-between items-start"
                         >
-                            &times;
-                        </button>
+                            <div>
+                                <p class="font-semibold">{{ market.name }}</p>
+                                <p class="text-gray-700">Selection: {{ market.selection.name }}</p>
+                                <p class="text-gray-500">Odds: {{ market.selection.odds }}</p>
+                            </div>
+                            <button
+                                @click="removeSelection(market.id)"
+                                class="text-red-500 hover:text-red-700 text-2xl mt-1 cursor-pointer"
+                            >
+                                &times;
+                            </button>
+                        </div>
+                    </div>
+
+                    <!--Money Input Component-->
+                    <MoneyInput v-model="stake"/>
+
+                    <!--Combined odds and Potential payout-->
+                    <div
+                        class="mt-4 p-6 bg-gray-100 rounded-xl shadow-md text-center border border-gray-200"
+                        v-if="betSummary.combinedOdds && betSummary.potentialPayout"
+                    >
+                        <p class="text-lg font-semibold text-gray-700 mb-2">
+                            Combined Odds
+                        </p>
+                        <p class="text-2xl font-bold text-blue-600 mb-4">
+                            {{ betSummary.combinedOdds }}
+                        </p>
+
+                        <hr class="border-gray-300 my-4">
+
+                        <p class="text-lg font-semibold text-gray-700 mb-2">
+                            Potential Payout
+                        </p>
+                        <p class="text-2xl font-bold text-green-600">
+                            {{ betSummary.potentialPayout
+                            ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(betSummary.potentialPayout)
+                            : '$0.00' }}
+                        </p>
                     </div>
                 </div>
-
-                <!--Money Input Component-->
-                <MoneyInput v-model="stake"/>
-
-                <!--Combined odds and Potential payout-->
-                <div
-                    class="mt-4 p-6 bg-gray-100 rounded-xl shadow-md text-center border border-gray-200"
-                    v-if="betSummary.combinedOdds && betSummary.potentialPayout"
-                >
-                    <p class="text-lg font-semibold text-gray-700 mb-2">
-                        Combined Odds
-                    </p>
-                    <p class="text-2xl font-bold text-blue-600 mb-4">
-                        {{ betSummary.combinedOdds }}
-                    </p>
-
-                    <hr class="border-gray-300 my-4">
-
-                    <p class="text-lg font-semibold text-gray-700 mb-2">
-                        Potential Payout
-                    </p>
-                    <p class="text-2xl font-bold text-green-600">
-                        {{ betSummary.potentialPayout
-                        ? new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(betSummary.potentialPayout)
-                        : '$0.00' }}
-                    </p>
+                <div v-else class="text-gray-400 mt-4">
+                    No selections yet.
                 </div>
-            </div>
-            <div v-else class="text-gray-400 mt-4">
-                No selections yet.
             </div>
         </div>
     </transition>
