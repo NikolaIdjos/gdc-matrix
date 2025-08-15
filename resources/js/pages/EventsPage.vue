@@ -93,20 +93,16 @@ const status = ref('');
 const startsAfter = ref('');
 
 const fetchEvents = async () => {
-    try {
-        const params = {
-            page: page.value,
-            ...(search.value && { search: search.value }),
-            ...(status.value && { status_id: status.value }),
-            ...(startsAfter.value && { starts_after: toUTCDateOnly(startsAfter.value) }),
-        };
+    const params = {
+        page: page.value,
+        ...(search.value && { search: search.value }),
+        ...(status.value && { status_id: status.value }),
+        ...(startsAfter.value && { starts_after: toUTCDateOnly(startsAfter.value) }),
+    };
 
-        const response = await axios.get('/api/events', { params });
-        events.value = response.data.data;
-        lastPage.value = response.data.meta.last_page || 1;
-    } catch (error) {
-        console.error(error);
-    }
+    const response = await axios.get('/api/events', { params });
+    events.value = response.data.data;
+    lastPage.value = response.data.meta.last_page || 1;
 };
 
 const goToEvent = (id: number) => {
