@@ -2,9 +2,29 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Database\Enums\CompetitorTypeEnum;
+use App\Models\Database\Enums\EventStatusEnum;
+use App\Models\Database\Event;
+use App\Models\Database\League;
+use App\Models\Database\Market;
+use App\Models\Database\Team;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin Event
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property Carbon|null $scheduled_at
+ * @property EventStatusEnum $status_id
+ * @property CompetitorTypeEnum $competitor_type_id
+ * @property-read League|null $league
+ * @property-read Collection|Team[] $teams
+ * @property-read Collection|Market[] $markets
+ */
 class EventResource extends JsonResource
 {
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Models\Database;
 
+use Database\Factories\Database\SelectionFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,12 +12,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $market_id
  * @property string $name
  * @property float $odds
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read Market $market
  */
 class Selection extends Model
 {
+    /**
+     * @use HasFactory<SelectionFactory>
+     */
     use HasFactory;
 
     protected $fillable = [
@@ -25,6 +27,9 @@ class Selection extends Model
         'odds',
     ];
 
+    /**
+     * @return BelongsTo<Market,$this>
+     */
     public function market(): BelongsTo
     {
         return $this->belongsTo(Market::class);

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Database\Selection;
 use Illuminate\Support\Collection;
 
 /**
@@ -15,12 +16,12 @@ class BetCalculator
      *
      * Multiplies all selection odds together using high-precision arithmetic.
      *
-     * @param  Collection  $selections  Collection of Selection models with an 'odds' property
-     * @return float Combined odds
+     * @param Collection<int, Selection> $selections
+     * @return float
      */
     public function combinedOdds(Collection $selections): float
     {
-        $result = 1;
+        $result = '1';
         foreach ($selections as $selection) {
             $result = bcmul($result, (string) $selection->odds, 10);
         }
@@ -33,12 +34,16 @@ class BetCalculator
      *
      * Uses combined odds and multiplies by stake.
      *
-     * @param  Collection  $selections  Collection of Selection models
-     * @param  float  $stake  Amount of money bet
-     * @return float Potential payout
+     * @param Collection<int, Selection> $selections
+     * @param float $stake
+     * @return float
      */
     public function potentialPayout(Collection $selections, float $stake): float
     {
-        return (float) bcdiv(bcmul($stake, $this->combinedOdds($selections), 4), '1', 2);
+        return (float) bcdiv(
+            bcmul((string) $stake, (string) $this->combinedOdds($selections), 4),
+            '1',
+            2
+        );
     }
 }

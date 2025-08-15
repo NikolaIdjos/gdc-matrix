@@ -3,9 +3,18 @@
 namespace App\Http\Resources;
 
 use App\Models\Database\Enums\QualifierEnum;
+use App\Models\Database\Pivot\EventTeam;
+use App\Models\Database\Team;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin Team
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property-read EventTeam|null $pivot
+ */
 class TeamResource extends JsonResource
 {
     /**

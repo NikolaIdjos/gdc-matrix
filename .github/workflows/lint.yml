@@ -33,4 +33,4 @@ jobs:
 
       # Run Larastan
       - name: Run Larastan
-        run: vendor/bin/phpstan analyse app database routes
+        run: vendor/bin/phpstan analyse

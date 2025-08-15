@@ -5,6 +5,7 @@ namespace App\Rules\Event;
 use App\Models\Database\Selection;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Translation\PotentiallyTranslatedString;
 
 /**
  * Validation rule to ensure that all selected IDs belong to the same event.
@@ -16,7 +17,7 @@ class SameEvent implements ValidationRule
      *
      * @param  string  $attribute  The name of the attribute under validation
      * @param  mixed  $value  The value of the attribute (expected to be an array of selection IDs)
-     * @param  \Closure(string, ?string=): \Illuminate\Translation\PotentiallyTranslatedString  $fail  Callback to indicate validation failure
+     * @param  \Closure(string, ?string=): PotentiallyTranslatedString  $fail  Callback to indicate validation failure
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
