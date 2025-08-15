@@ -59,6 +59,7 @@ class EventController extends Controller
                     ->when($request->has('starts_after'), function ($query) use ($request) {
                         $query->where('scheduled_at', '>', Carbon::parse($request->get('starts_after')));
                     })
+                    ->orderBy('scheduled_at', 'asc')
                     ->paginate(10);
 
                 return EventResource::collection($events)->response()->getData(true);
