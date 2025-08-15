@@ -20,9 +20,18 @@ class MarketFactory extends Factory
      */
     public function definition(): array
     {
+        $marketsData = [
+            'Match Result',
+            'Over/Under 2.5 Goals',
+            'Both Teams to Score',
+            'Double Chance',
+            'Correct Score',
+            'First Team to Score',
+        ];
+
         return [
             'event_id' => Event::factory(),
-            'name' => $this->faker->randomElement(['Match Winner', 'Total Goals', 'Handicap']),
+            'name' => $this->faker->randomElement($marketsData),
         ];
     }
 }
