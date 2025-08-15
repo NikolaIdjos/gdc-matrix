@@ -23,6 +23,7 @@ class Team extends Model
             'team_id',
             'event_id'
         )
-            ->withPivot('qualifier_id');
+            ->withPivot('qualifier_id')
+            ->orderBy('pivot_qualifier_id');
     }
 }
