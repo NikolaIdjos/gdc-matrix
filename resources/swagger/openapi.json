@@ -1,0 +1,228 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Events & Bets API",
+        "version": "1.0.0",
+        "description": "API to fetch events and place bets"
+    },
+    "paths": {
+        "/api/events": {
+            "get": {
+                "summary": "List events with filters",
+                "parameters": [
+                    {
+                        "name": "status_id",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "type": "integer" },
+                        "description": "Filter events by status"
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "type": "string" },
+                        "description": "Search events by name"
+                    },
+                    {
+                        "name": "starts_after",
+                        "in": "query",
+                        "required": false,
+                        "schema": { "type": "string", "format": "date" },
+                        "description": "Show events starting after this date"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of events",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": [
+                                        {
+                                            "id": 1,
+                                            "name": "Championship Final: Tigers vs Wolves",
+                                            "slug": "championship-final-tigers-vs-wolves",
+                                            "scheduled_at": "2026-08-28T18:00:00+00:00",
+                                            "status_id": 1,
+                                            "status": "SCHEDULED",
+                                            "competitor_type_id": 1,
+                                            "competitor_type": "TEAM",
+                                            "league": {
+                                                "id": 1,
+                                                "name": "National Premier League",
+                                                "slug": "national-premier-league"
+                                            },
+                                            "teams": [
+                                                { "id": 11, "name": "Tigers", "slug": "tigers", "qualifier_id": 1, "qualifier": "HOME" },
+                                                { "id": 12, "name": "Wolves", "slug": "wolves", "qualifier_id": 2, "qualifier": "AWAY" }
+                                            ],
+                                            "markets": [
+                                                {
+                                                    "id": 1,
+                                                    "name": "Match Winner",
+                                                    "selections": [
+                                                        { "id": 1, "market_id": 1, "name": "Tigers", "odds": 1.85 },
+                                                        { "id": 2, "market_id": 1, "name": "Wolves", "odds": 2.10 },
+                                                        { "id": 3, "market_id": 1, "name": "Draw", "odds": 3.20 }
+                                                    ]
+                                                },
+                                                {
+                                                    "id": 2,
+                                                    "name": "Total Goals",
+                                                    "selections": [
+                                                        { "id": 4, "market_id": 2, "name": "Over 2.5", "odds": 1.95 },
+                                                        { "id": 5, "market_id": 2, "name": "Under 2.5", "odds": 1.90 }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "links": {
+                                        "first": "http://localhost/api/events?page=1",
+                                        "last": "http://localhost/api/events?page=1",
+                                        "prev": null,
+                                        "next": null
+                                    },
+                                    "meta": {
+                                        "current_page": 1,
+                                        "from": 1,
+                                        "last_page": 1,
+                                        "links": [
+                                            { "url": null, "label": "&laquo; Previous", "active": false },
+                                            { "url": "http://localhost/api/events?page=1", "label": "1", "active": true },
+                                            { "url": null, "label": "Next &raquo;", "active": false }
+                                        ],
+                                        "path": "http://localhost/api/events",
+                                        "per_page": 10,
+                                        "to": 1,
+                                        "total": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/events/{id}": {
+            "get": {
+                "summary": "Get event details by ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": { "type": "integer" },
+                        "description": "ID of the event"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Event details",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "id": 1,
+                                    "name": "Championship Final: Tigers vs Wolves",
+                                    "slug": "championship-final-tigers-vs-wolves",
+                                    "scheduled_at": "2026-08-28T18:00:00+00:00",
+                                    "status_id": 1,
+                                    "status": "SCHEDULED",
+                                    "competitor_type_id": 1,
+                                    "competitor_type": "TEAM",
+                                    "league": {
+                                        "id": 1,
+                                        "name": "National Premier League",
+                                        "slug": "national-premier-league"
+                                    },
+                                    "teams": [
+                                        { "id": 11, "name": "Tigers", "slug": "tigers", "qualifier_id": 1, "qualifier": "HOME" },
+                                        { "id": 12, "name": "Wolves", "slug": "wolves", "qualifier_id": 2, "qualifier": "AWAY" }
+                                    ],
+                                    "markets": [
+                                        {
+                                            "id": 1,
+                                            "name": "Match Winner",
+                                            "selections": [
+                                                { "id": 1, "market_id": 1, "name": "Tigers", "odds": 1.85 },
+                                                { "id": 2, "market_id": 1, "name": "Wolves", "odds": 2.10 },
+                                                { "id": 3, "market_id": 1, "name": "Draw", "odds": 3.20 }
+                                            ]
+                                        },
+                                        {
+                                            "id": 2,
+                                            "name": "Total Goals",
+                                            "selections": [
+                                                { "id": 4, "market_id": 2, "name": "Over 2.5", "odds": 1.95 },
+                                                { "id": 5, "market_id": 2, "name": "Under 2.5", "odds": 1.90 }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/bets": {
+            "post": {
+                "summary": "Place a bet",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "selection_ids": {
+                                        "type": "array",
+                                        "items": { "type": "integer" },
+                                        "description": "IDs of the selected options"
+                                    },
+                                    "stake": {
+                                        "type": "number",
+                                        "description": "Amount to bet"
+                                    }
+                                },
+                                "required": ["selection_ids", "stake"]
+                            },
+                            "example": {
+                                "selection_ids": [1],
+                                "stake": 100
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Bet result",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "stake": 100,
+                                    "combined_odds": 1.85,
+                                    "potential_payout": 185,
+                                    "selections": [
+                                        { "id": 1, "market_id": 1, "name": "Tigers", "odds": 1.85 }
+                                    ],
+                                    "event": {
+                                        "id": 1,
+                                        "name": "Championship Final: Tigers vs Wolves",
+                                        "slug": "championship-final-tigers-vs-wolves",
+                                        "scheduled_at": "2026-08-28T18:00:00+00:00",
+                                        "status_id": 1,
+                                        "status": "SCHEDULED",
+                                        "competitor_type_id": 1,
+                                        "competitor_type": "TEAM"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
